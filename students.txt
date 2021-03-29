@@ -1,0 +1,84 @@
+Kolchanova Olga Alecsandrovna
+0322
+8
+F
+evening
+4 3 5 4 4 5 4 5 
+Sun Feb 21 21:12:00 2021
+Dmitriev Irioslav Ivanovich
+4013
+2
+M
+day
+5 5 5 5 5 4 5 5 
+Thu Feb 25 16:30:41 2021
+Alexsova Alsu Evgenievna
+3806
+11
+F
+evening
+5 5 5 5 5 5 5 5 
+Tue Feb 24 00:30:46 2021
+Sidorov Lev Vladimirovich
+4098
+7
+M
+distance
+5 5 5 5 5 5 5 5 
+Sun Feb 21 10:30:16 2021
+Fedorova Maria Romanovna
+2455
+11
+F
+day
+3 3 5 4 5 4 5 5 
+Sat Feb 20 11:59:19 2021
+Goncharov Artem Artemovich
+0323
+2
+M
+day
+5 4 3 4 4 4 4 5 
+Tue Feb 24 11:15:56 2021
+Anisimov Dmitrii Valerievich
+6789
+6
+M
+day
+4 5 4 4 5 5 4 4 
+Mon Feb 15 18:26:15 2021
+Larkina Natalia Olegovna
+1345
+6
+F
+evening
+5 5 4 5 5 4 5 5 
+Mon Feb 22 14:12:54 2021
+Orehova Irina Fedorova
+3222
+7
+F
+distance
+5 4 4 5 5 4 5 5 
+Thu Feb 25 17:23:42 2021
+Sorokina Valeria Ivanovna
+5444
+7
+F
+day
+5 4 5 3 5 5 5 4 
+Sun Feb 21 19:11:56 2021
+Kuzhecov Boris Antonovich
+2000
+1
+M
+day
+5 5 5 5 4 4 4 5 
+Sun Jan 31 13:45:34 2021
+Frolova Anastasia Sergeevna
+5067
+6
+F
+day
+3 3 3 4 4 4 4 5 
+Mon Jan 25 23:44:12 2021
