@@ -1,0 +1,530 @@
+//Для запуска добавьте файл students через проводник в проект. Если не получится, то напишите мне в вк и я исправлю эту проблему https://vk.com/nattattkn
+//Косенко Анастасия, гр. 0324
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+#include <cstring>
+#include <Ratings.h>
+
+using namespace std;
+
+struct students
+{
+    string fio;
+    string pol;
+    int group;
+    int n_v_spiske;
+    int ratings[8];
+    string forma_obuch;
+    string data_izm;
+};
+
+//студенты с индексом i
+void Show(vector<students> people, int n, int i)
+{
+    
+    cout << "ФИО:" << people[i].fio << "\n";
+    cout << "Номер группы:" << people[i].group << "\n";
+    cout << "Номер студента в списке:" << people[i].n_v_spiske << "\n";
+    cout << "Пол:" << people[i].pol << "\n";
+    cout << "Форма обучения:" << people[i].forma_obuch << "\n";
+    cout << "Оценки:";
+    for (int j = 0; j < 8; j++) cout << people[i].ratings[j] << " ";  cout << "\n";
+    cout << "Дата внесения изменнеия в запись:" << people[i].data_izm << "\n\n";
+
+}
+
+//вывод всех студентов
+void VseStudents(vector<students> people, int n)
+{
+    int stud;
+    cout << "Все студенты \n\n";
+    for (int i = 0; i < n; i++)
+    {
+        stud = i + 1;
+        cout << "Студент " << stud << "\n\n";
+        cout << "ФИО:" << people[i].fio << "\n";
+        cout << "Номер группы:" << people[i].group << "\n";
+        cout << "Номер студента в списке:" << people[i].n_v_spiske << "\n";
+        cout << "Пол:" << people[i].pol << "\n";
+        cout << "Форма обучения:" << people[i].forma_obuch << "\n";
+        cout << "Оценки:";
+        for (int j = 0; j < 8; j++) cout << people[i].ratings[j] << " ";  cout << "\n";
+        cout << "Дата и время изменений:" << people[i].data_izm << "\n\n";
+    }
+    cout << "\n\n";
+    system("pause");
+    system("cls");
+}
+//добавление студента
+void NovStud(vector<students>& people, int& n)
+{
+    n++;
+    people.resize(n);
+    int i = n - 1;
+
+    ofstream  fi;
+    fi.open("students.txt", fstream::app);
+    if (!fi.is_open())
+    {
+        cout << "\nВ открытии файла произошла ошибка";
+    }
+    else {
+
+        cout << "Введите фамилию, имя и отчество: ";
+        cin.ignore();
+        getline(cin, people[i].fio);
+        fi << people[i].fio << "\n";
+
+        cout << "Введите номер группы: ";
+        cin >> people[i].group;
+        fi << people[i].group << "\n";
+
+        cout << "Введите номер группы: ";
+        cin >> people[i].n_v_spiske;
+        fi << people[i].n_v_spiske << "\n";
+
+        cout << "Введите пол: ";
+        cin.ignore();
+        getline(cin, people[i].pol);
+        fi << people[i].pol << "\n";
+
+        cout << "Введите форму обучения: ";
+        getline(cin, people[i].forma_obuch);
+        fi << people[i].forma_obuch << "\n";
+
+        for (int j = 0; j < 8; j++) { cout << "Введите оценки за сессию: "; cin >> people[i].ratings[j]; }
+        for (int j = 0; j < 8; j++) fi << people[i].ratings[j] << " ";
+        fi << "\n";
+
+        cout << "Введите дату и время изменения: ";
+        cin.ignore();
+        getline(cin, people[i].data_izm);
+        fi << people[i].data_izm << "\n";
+
+    }
+
+    fi.close();
+    cout << "\n\nRecorded\n\n";
+    system("pause");
+    system("cls");
+}
+//запись в файл
+void Recording(vector<students>& people, int& n)
+{
+
+    ofstream Rec;
+    Rec.open("students.txt");
+    if (!Rec.is_open())
+    {
+        cout << "\nВ открытии файла произошла ошибка";
+    }
+    else {
+
+        for (int i = 0; i < n; i++)
+        {
+            Rec << people[i].fio << "\n";
+            Rec << people[i].group << "\n";
+            Rec << people[i].n_v_spiske << "\n";
+            Rec << people[i].pol << "\n";
+            Rec << people[i].forma_obuch << "\n";
+            for (int j = 0; j < 8; j++) Rec << people[i].ratings[j] << " ";
+            Rec << "\n";
+            Rec << people[i].data_izm << "\n";
+        }
+    }
+    Rec.close();
+
+}
+//изменение определенных данных
+void Izmenenia(vector<students>& people, int& n)
+{
+    int num, choose;
+    cout << "Введите номер студента от 1 до " << n << "\n";
+    cout << "Вы выбрали ===> ";
+    cin >> num;
+    num--;
+
+    cout << "\nЧто нужно изменить:\n\n";
+    cout << "1 - ФИО\n";
+    cout << "2 - номер группы\n";
+    cout << "3 - номер в списке\n";
+    cout << "4 - пол\n";
+    cout << "5 - fформу обучения\n";
+    cout << "6 - оценки\n";
+    cout << "7 - dдату и время изменений\n";
+
+    cout << "Вы выбрали ====> ";
+    cin >> choose;
+    cout << "\n";
+
+    switch (choose)
+    {
+    case 1:
+        cout << "Введите ФИО: "; cin.ignore();
+        getline(cin, people[num].fio);
+        break;
+    case 2:
+        cout << "ВВедите номер группы: ";
+        cin >> people[num].group;
+        break;
+    case 3:
+        cout << "Введите номер в списке: ";
+        cin >> people[num].n_v_spiske;
+        break;
+    case 4:
+        cout << "Введите пол: "; cin.ignore();
+        getline(cin, people[num].pol);
+        break;
+    case 5:
+        cout << "Введите форму обучения: "; cin.ignore();
+        getline(cin, people[num].forma_obuch);
+        break;
+    case 6:
+        for (int j = 0; j < 8; j++) { cout << "Введите оценки: "; cin >> people[num].ratings[j]; }
+        break;
+    case 7:
+        cout << "Введите дату и время: "; cin.ignore();
+        getline(cin, people[num].data_izm);
+        break;
+    }
+    Recording(people, n);
+    cout << "\nДанные подверглись изменению\n\n";
+    system("pause");
+    system("cls");
+}
+//данные студентов определенной группы
+void StudentsVgr(vector<students> people, int n)
+{
+    int num, check = 0;
+    cout << "Введите номер группы";
+    cout << "\nВы выбрали: ";
+    cin >> num; cout << "\n";
+    for (int i = 0; i < n; i++)
+    {
+        if (people[i].group == num)
+        {
+            Show(people, n, i);
+            check = 1;
+        }
+
+    }
+
+    if (check == 0) cout << "Такой группы нет";
+    cout << "\n\n";
+    system("pause");
+    system("cls");
+}
+//топ 3 
+void Rating(vector<students> people, int n)
+{
+    double* rating = new double[n];
+    double max1 = 0, max2 = 0, max3 = 0, dub = 0.0;
+    int top1 = 0, top2 = 0, top3 = 0;
+    for (int i = 0; i < n; i++) //Перебираем студентов
+    {
+
+        for (int j = 0; j < 8; j++) //Перебираем оценки
+        dub += people[i].ratings[j]; //суммируем оценки
+        dub /= 8; //находим сред.значение 
+
+        rating[i] = dub;
+
+        dub = 0;
+    }
+    for (int i = 0; i < n; i++) { if (rating[i] > max1) { max1 = rating[i]; top1 = i; } }
+    for (int i = 0; i < n; i++) { if (rating[i] > max2 && people[i].fio != people[top1].fio) { max2 = rating[i]; top2 = i; } }
+    for (int i = 0; i < n; i++) { if (rating[i] > max3 && people[i].fio != people[top1].fio && people[i].fio != people[top2].fio) { max3 = rating[i]; top3 = i; } }
+
+
+    cout << "Первое место: " << max1 << "\n";  Show(people, n, top1);
+    cout << "Второе место: " << max2 << "\n";  Show(people, n, top2);
+    cout << "\nТретье место: " << max3 << "\n";  Show(people, n, top3);
+
+    delete[] rating;
+    cout << "\n\n";
+    system("pause");
+    system("cls");
+}
+//количество мужчин и женщин
+void MF(vector<students> people, int n)
+{
+    int countM = 0, countF = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (people[i].pol == "F") 
+            countF++; //счетчик женщин
+        if (people[i].pol == "M") 
+            countM++;//счетчик мужчин
+
+    }
+
+    cout << "\nКоличество женского пола: " << countF << "\n";
+    cout << "Количество мужского пола: " << countM;
+    system("pause");
+    system("cls");
+}
+//количество степендиатов
+void Stepuxa(vector<students> people, int n)
+{
+    int check = 0, count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < 8; j++)
+            if (people[i].ratings[j] == 3 || people[i].ratings[j] == 2) check = 1; //проверка на оценки выше 3
+
+        if (people[i].forma_obuch == "day" && check == 0) count++; //Проверка на очное обучение и оценки выше 4
+
+        check = 0;
+    }
+
+    cout << "\nНомера студентов со степендией: " << count << "\n\n\n";
+    system("pause");
+    system("cls");
+}
+//оценки и стипендии
+void BezStepuxi(vector<students> people, int n)
+{
+    int uslov = 0, count = 0, otlichnik = 0, ocenka_5 = 0, ocenka_4 = 0;
+    cout << "Студенты, которые не получат стипендию:\n\n";
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < 8; j++)
+            if (people[i].ratings[j] == 3 || people[i].ratings[j] == 2)
+                uslov = 1; //Перебираем студентов, которые имеют оценки 2 или 3
+
+        if (people[i].forma_obuch == "evening" || uslov == 1) //Перебираем людей, которые на вечерке или имеют 2 или 3
+        {
+            Show(people, n, i); 
+        }
+
+        uslov = 0;
+    }
+    system("pause"); system("cls");
+    cout << "Студенты с оценкой 4 или 5:\n\n";
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (people[i].ratings[j] == 2) uslov = 1;
+            if (people[i].ratings[j] == 3) uslov = 1;
+            if (people[i].ratings[j] == 5) ocenka_5++; //Ведем счет 5
+            if (people[i].ratings[j] == 4) ocenka_4++;//Ведем счет 4
+        }
+        if (uslov == 0 && ocenka_5 < 8 && ocenka_4 > 0) //Проверка наличия 5 и 4
+        {
+            Show(people, n, i);
+        }
+        ocenka_5 = 0;
+        uslov = 0;
+    }
+    system("pause"); system("cls");
+    cout << "Люди, которые учатся только на 5:\n";
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < 8; j++)
+            if (people[i].ratings[j] == 5) otlichnik++;
+
+        if (otlichnik == 8)
+        {
+            Show(people, n, i);
+        }
+        otlichnik = 0;
+    }
+    cout << "\n\n";
+    system("pause");
+    system("cls");
+}
+//данные студентов с определенным номером
+void NomerVSpiske(vector<students> people, int n)
+{
+    int num, check = 0;
+    cout << "Введите номер студента: ";
+
+    cin >> num; cout << "\n";
+    for (int i = 0; i < n; i++)
+    {
+        if (people[i].n_v_spiske == num) //Перебор всех студентов с таким же номером
+        {
+            Show(people, n, i);
+            check = 1;
+        }
+
+    }
+
+    if (check == 0) cout << "Таких студентов нет";
+    cout << "\n\n";
+    system("pause");
+    system("cls");
+}
+//дата
+void Time(vector<students> people, int n)
+{
+    string t[12] = { "12","13","14","15","16","17","18","19","20","21","22","23" };
+    string t_[12] = { "00","01","02","03","04","05","06","07","08","09","10","11" };
+    string sub, dub, time_; int p, check = 0;
+    cout << "Введите день недели, месяц и время изменений данных: ";
+    cin.ignore();
+    getline(cin, time_);
+    for (int i = 0; i < n; i++)//Перебираем людей
+    {
+        sub = people[i].data_izm;//Смотрим на дату изменений человека
+        if (sub.find_first_not_of(time_) >= 10)//Проверка на символы с строке
+        {
+            Show(people, n, i);
+            check = 1;
+        }
+    }
+    if (check == 0) cout << "Изменений в эту дату не было\n\n";
+    system("pause"); system("cls");
+    cout << "Изменения после полудня\n\n";
+    for (int i = 0; i < n; i++)
+    {
+        dub = people[i].data_izm;//смотрим на даты измнений
+        if (dub.size() == 24) //смотрим на размер строчки
+        p = 11;
+        else 
+        p = 10;
+        for (int j = 0; j < 12; j++) 
+        {
+            if (t[j] == dub.substr(p, 2)) //возвращает подстроку строки string длиной length , начинающегося с start символа по счету. Если данные подходят к допустимым значениям t, то выводим
+            {
+                Show(people, n, i);
+               
+            }
+        }
+    }
+    system("pause"); system("cls");
+    cout << "Записи до полудня\n";
+    for (int i = 0; i < n; i++)
+    {
+        dub = people[i].data_izm;
+        if (dub.size() >= 24) 
+         p = 11;
+        else 
+        p = 10;
+
+        for (int j = 0; j < 12; j++)
+        {
+            if (t_[j] == dub.substr(p, 2))//рассматриваем относительно строчки t_
+            {
+                Show(people, n, i);
+            }
+        }
+    }
+    cout << "\n\n";
+    system("pause");
+    system("cls");
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    ifstream fin;
+    fin.open("students.txt");
+    int n = 0, t = 0, task;
+    while (!fin.eof()) {
+        if (fin.get() == '\n')
+            n++;
+    }
+    n = n / 7;// количество студентов
+    vector<students>people(n);
+    ifstream f;
+    f.open("students.txt");
+    if (!f.is_open())
+    {
+        cout << "\nFile opening error";
+    }
+    else {
+
+        for (int i = 0; i < n; i++)
+        {
+            getline(f, people[i].fio);
+            f >> people[i].group; f.ignore();
+            f >> people[i].n_v_spiske; f.ignore();
+            getline(f, people[i].pol);
+            getline(f, people[i].forma_obuch);
+            for (int j = 0; j < 8; j++) { f >> people[i].ratings[j]; }
+            f.ignore(2);
+            getline(f, people[i].data_izm);
+
+        }
+    }
+    f.close();
+
+    do
+    {
+
+        cout << "Введите номер задания:\n";
+        cout << "1.Создание новой записи о студенте\n";
+        cout << "2.Внесение изменений в уже имеющуюся запись\n";
+        cout << "3.Вывод всех данных о студентах\n";
+        cout << "4.Вывод информации обо всех студентах группы\n";
+        cout << "5.Вывод топа самых успешных студентов с наивысшим по рейтингу средним баллом за прошедшую сессию\n";
+        cout << "6.Вывод количества студентов мужского и женского пола\n";
+        cout << "7.Определение количества студентов, которые будут получать стипендию\n";
+        cout << "8.Вывод данных о студентах, которые не получают стипендию; учатся только на «хорошо» и «отлично»; учатся только на «отлично»\n";
+        cout << "9.Вывод данных о студентах, имеющих номер в списке – k\n";
+        cout << "10. Вывод всех записей, сделанных в день, который введет пользователь. Вывод всех записей, сделанных после полудня. Вывод всех записей, сделанных до полудня\n";
+        cout << "11.Выход\n";
+        cout << "\n";
+
+        cout << "Вы выбрали ====> ";
+        cin >> task;
+
+        system("cls");
+
+        switch (task)
+        {
+        case 1:
+            NovStud(people, n);
+            break;
+
+        case 2:
+            Izmenenia(people, n);
+            break;
+
+        case 3:
+            VseStudents(people, n);
+            break;
+
+        case 4:
+            StudentsVgr(people, n);
+            break;
+
+        case 5:
+            Rating(people, n);
+            break;
+
+        case 6:
+            MF(people, n);
+            break;
+
+        case 7:
+            Stepuxa(people, n);
+            break;
+
+        case 8:
+            BezStepuxi(people, n);
+            break;
+
+        case 9:
+            NomerVSpiske(people, n);
+            break;
+
+        case 10:
+            Time(people, n);
+            break;
+
+        case 11:
+
+            break;
+      
+        }
+
+    } while (task != 11);
+
+
+    return 0;
+}
