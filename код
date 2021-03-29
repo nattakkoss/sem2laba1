@@ -81,7 +81,7 @@ void NovStud(vector<students>& people, int& n)
         cin >> people[i].group;
         fi << people[i].group << "\n";
 
-        cout << "Введите номер группы: ";
+        cout << "Введите номер в списке: ";
         cin >> people[i].n_v_spiske;
         fi << people[i].n_v_spiske << "\n";
 
